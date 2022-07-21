@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'components/navbar.html' %}
+<div class="container">
+    <div class="row">
+        <h1 style = "color: #A0D995;">{{question.content}}</h1>
+    </div>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <div class="collection">
+                    {% for choice in question.choice_set.all %}
+                        <div class="collection-item brown lighten-2">
+                            {% if answer %}
+                                {{choice.content}}(Selected by: {{choice.answer_count}} user(s))
+                                {% comment %} The below if statement's LHS has value NULL always! Hence I am not able to show the tick icon! 😯 {% endcomment %}
+                                {% if answer.choice.id == choice.id %}
+                                    <i class="material-icons brown-text text-darken-4">check</i>
+                                {% endif %}
+                            {% else %}
+                                <label>
+                                    <input class="with-gap" name="choice" type="radio" value="{{choice.id}}" />
+                                    <span class="green-text text-accent-2">{{choice.content}}</span>
+                                </label>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% if not answer %}
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            {% endif %}
+        </div>
+        {% comment %} To Debug: {% endcomment %}
+        <div class="row">
+            <p class="red">
+                <ul>
+                    {% for error in form.errors %}
+                        <li>
+                            {{error}}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </p>
+        </div>
+    </form>
+</div>   
+{% endblock content %}
