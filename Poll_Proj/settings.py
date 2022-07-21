@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 # dumbo@pwd for Alvin
 # secretpwd for John
+# iamnew@pwd for Sarah
 from pathlib import Path
 import os
 

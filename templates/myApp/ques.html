@@ -15,7 +15,6 @@
                         <div class="collection-item brown lighten-2">
                             {% if answer %}
                                 {{choice.content}}(Selected by: {{choice.answer_count}} user(s))
-                                {% comment %} The below if statement's LHS has value NULL always! Hence I am not able to show the tick icon! 😯 {% endcomment %}
                                 {% if answer.choice.id == choice.id %}
                                     <i class="material-icons brown-text text-darken-4">check</i>
                                 {% endif %}

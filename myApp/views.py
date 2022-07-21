@@ -28,7 +28,7 @@ class Question(SingleObjectMixin, FormView):
         data['answer'] = models.Answer.objects.filter(
             question=self.get_object(),
             user=self.request.user
-        )
+        ).first()
         return data
 
     def form_valid(self, form):
